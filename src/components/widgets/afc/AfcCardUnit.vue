@@ -3,6 +3,12 @@
     <v-row>
       <v-col class="pb-0 d-flex flex-row justify-space-between align-center">
         <h3 class="text-h6">
+          <inline-svg
+            v-if="unitSVG"
+            :src="unitSVG"
+            width="10%"
+            height="10%"
+          />
           <v-icon
             v-if="unitIcon"
             left
@@ -93,6 +99,22 @@ export default class AfcCardUnit extends Mixins(StateMixin, AfcMixin) {
         return '$afcIconNightOwl'
       case 'quattrobox':
         return '$afcIconQuattroBox'
+      case 'vivid':
+        return '$afcIconVVD'
+      default:
+        return null
+    }
+  }
+
+  get unitSVG (): string | null {
+    if (!this.afcShowUnitIcons) {
+      return null
+    }
+    switch (this.unitType.toLowerCase()) {
+      case 'emu':
+        return `${import.meta.env.BASE_URL}img/mmu/mmu_EMU.svg`
+      case 'claymore':
+        return `${import.meta.env.BASE_URL}img/mmu/mmu_Claymore.svg`
       default:
         return null
     }
